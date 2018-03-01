@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4896586230030612}
   - component: {fileID: 54920626720527836}
-  - component: {fileID: 114512524103166588}
+  - component: {fileID: 114985351545419654}
   m_Layer: 9
   m_Name: Enemy_2
   m_TagString: Enemy
@@ -37,8 +37,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4050574694568036}
   - component: {fileID: 33725838146323256}
-  - component: {fileID: 135838735909776188}
   - component: {fileID: 23945769274761344}
+  - component: {fileID: 136862150368116182}
   m_Layer: 9
   m_Name: Wing
   m_TagString: Untagged
@@ -97,7 +97,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1028142608192702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.776914, y: -1.7955058, z: -6.042593}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4050574694568036}
@@ -114,7 +114,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -130,7 +129,6 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -148,7 +146,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -164,7 +161,6 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -202,7 +198,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &114512524103166588
+--- !u!114 &114985351545419654
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -210,18 +206,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1028142608192702}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21030149497aa2d4189bffbc94256c18, type: 3}
+  m_Script: {fileID: 11500000, guid: dfa049b0a863957429b02acc311927dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
   fireRate: 0.3
   health: 10
   score: 100
-  _: 0
+  showDamageForFrames: 2
+  powerUpDropChance: 1
+  ________________: 0
+  originalColors: []
+  materials: []
+  remainingDamageFrames: 0
   bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   boundsCenterOffset: {x: 0, y: 0, z: 0}
+  waveFrequency: 2
+  waveWidth: 4
+  waveRotY: 45
 --- !u!135 &135152399976465028
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -234,8 +238,8 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &135838735909776188
-SphereCollider:
+--- !u!136 &136862150368116182
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -243,6 +247,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}

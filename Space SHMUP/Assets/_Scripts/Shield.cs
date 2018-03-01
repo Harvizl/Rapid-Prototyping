@@ -26,7 +26,7 @@ public class Shield : MonoBehaviour {
             Material mat = this.GetComponent<Renderer>().material;
 
             // Adjust the texture offset to show difference Shield levels
-            mat.mainTextureOffset = new Vector2(0.2f * levelShown, 0);
+            mat.mainTextureOffset = new Vector2(0.2f * levelShown, 0);            
         }
         // Rotate the Shield a bit every second
         float rZ = (rotationPerSecond * Time.time * 360) % 360f;

@@ -35,21 +35,26 @@ public class Hero : MonoBehaviour
     // This variable holds a reference to the last triggering GameObject
     public GameObject lastTriggerGo = null;
 
+    public GameObject heroGO;
+    public GameObject shieldGO;
+    public GameObject cockpitGO;
+
     void Awake()
     {
         // Sets the Singleton
         S = this;
         bounds = Utils.CombineBoundsOfChildren(this.gameObject);
-
-        // Reset the weapons to start _Hero with 1 blaster
-        ClearWeapons();
-        weapons[0].SetType(WeaponType.blaster);
     }
 
     // Use this for initialization
     void Start()
     {
+        // Reset the weapons to start _Hero with 1 blaster
+        ClearWeapons();
+        weapons[0].SetType(WeaponType.blaster);
 
+        heroGO = GameObject.FindGameObjectWithTag("Hero");
+        shieldGO = heroGO.transform.Find("Shield").gameObject;
     }
 
     // Update is called once per frame
@@ -61,8 +66,8 @@ public class Hero : MonoBehaviour
 
         // Change transform.position based on the axes
         Vector3 pos = transform.position;
-        pos.x += xAxis * speed * Time.deltaTime;
         pos.y += yAxis * speed * Time.deltaTime;
+        pos.x += xAxis * speed * Time.deltaTime;
         transform.position = pos;
 
         bounds.center = transform.position;
@@ -75,7 +80,7 @@ public class Hero : MonoBehaviour
             transform.position = pos;
         }
 
-        // Rorate the ship to make it feel more dynamic
+        // Rotate the ship to make it feel more dynamic
         transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);
 
         // Use the fireDelegate to fire Weapons
@@ -91,13 +96,14 @@ public class Hero : MonoBehaviour
     {
         // Find the tag of other.gameObject or its parent GameObjects
         GameObject go = Utils.FindTaggedParent(other.gameObject);
-
+        
         // Make sure it's not the same triggering go as last time
         if (go == lastTriggerGo)
         {
             return;
         }
         lastTriggerGo = go;
+
         if (go.tag == "Enemy")
         {
             // If the Shield was triggered by an Enemy
@@ -111,7 +117,7 @@ public class Hero : MonoBehaviour
 
         else if (go.tag == "PowerUp")
         {
-            // If the shield was triggerd by a PowerUp
+            // If the Shield was triggerd by a PowerUp
             AbsorbPowerUp(go);
         }
 
@@ -119,6 +125,20 @@ public class Hero : MonoBehaviour
         {
             // Otherwise announce the original other.gameObject
             print("Triggered: " + other.gameObject.name);
+        }
+
+        if (shieldLevel == 0)
+        {
+            shieldGO.SetActive(false);
+            
+        }
+
+        if (shieldLevel == 0 && go.tag == "PowerUp" )
+        {
+            print("Shields on");
+            shieldGO.SetActive(true);
+            // If the Shield was triggerd by a PowerUp
+            AbsorbPowerUp(go);
         }
     }
 
